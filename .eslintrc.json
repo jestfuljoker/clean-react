@@ -14,13 +14,32 @@
     "project": "./tsconfig.json"
   },
   "plugins": [
-    "react"
+    "react",
+    "eslint-plugin-import-helpers"
   ],
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/semi": "off",
     "no-tabs": "off",
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/consistent-type-imports": [
@@ -31,6 +50,25 @@
       }
     ],
     "@typescript-eslint/member-delimiter-style": "off",
-    "@typescript-eslint/comma-dangle": "off"
+    "@typescript-eslint/comma-dangle": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "module",
+          "/^~/",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "ignoreCase": true
+        }
+      }
+    ]
   }
 }
