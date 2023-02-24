@@ -5,7 +5,8 @@
   "author": "Christofer Assis <chris.f.assis18@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@swc/core": "^1.3.36",
