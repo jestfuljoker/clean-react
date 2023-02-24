@@ -30,6 +30,7 @@
         "fixStyle": "separate-type-imports"
       }
     ],
-    "@typescript-eslint/member-delimiter-style": "off"
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/comma-dangle": "off"
   }
 }
