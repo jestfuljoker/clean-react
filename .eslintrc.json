@@ -22,10 +22,7 @@
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/semi": "off",
     "no-tabs": "off",
-    "indent": [
-      "error",
-      "tab"
-    ],
+    "indent": "off",
     "comma-dangle": [
       "error",
       {
