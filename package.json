@@ -5,7 +5,10 @@
   "author": "Christofer Assis <chris.f.assis18@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test -- --watch",
+    "test:staged": "yarn test -- --findRelatedTests",
+    "test:ci": "yarn test -- --coverage",
     "prepare": "husky install"
   },
   "devDependencies": {
