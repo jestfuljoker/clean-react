@@ -1,10 +1,9 @@
 import type {
 	HttpPostClient,
 	HttpPostParams,
-} from '~/data/protocols/http/http-post-client';
-
-import type { HttpResponse } from '../protocols/http/http-response';
-import { HttpStatusCode } from '../protocols/http/http-response';
+	HttpResponse,
+} from '../protocols/http';
+import { HttpStatusCode } from '../protocols/http';
 
 export class HttpPostClientSpy<TParamsBody, TResponseBody>
 	implements HttpPostClient<TParamsBody, TResponseBody>
