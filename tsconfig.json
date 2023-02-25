@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ES6",
     "lib": [
       "DOM",
       "DOM.Iterable",
@@ -9,9 +9,7 @@
     "module": "ESNext",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
     "jsx": "react",
     "rootDir": "src",
     "baseUrl": "src",
@@ -21,9 +19,7 @@
       ]
     },
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "noEmit": true
+    "resolveJsonModule": true
   },
   "include": [
     "src"
