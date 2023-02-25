@@ -23,6 +23,7 @@
     "@typescript-eslint/semi": "off",
     "no-tabs": "off",
     "indent": "off",
+    "@typescript-eslint/brace-style": "off",
     "comma-dangle": [
       "error",
       {
