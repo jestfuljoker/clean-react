@@ -10,9 +10,10 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "strict": true,
-    "jsx": "react",
-    "rootDir": "src",
+    "jsx": "react-jsx",
+    "rootDir": ".",
     "baseUrl": "src",
+    "incremental": true,
     "paths": {
       "~/*": [
         "*"
@@ -22,7 +23,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src"
+    "src",
+    "vite.config.ts",
   ],
   "exclude": [
     "node_modules"

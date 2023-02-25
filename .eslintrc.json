@@ -10,24 +10,57 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard-with-typescript"
+    "standard-with-typescript",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:import/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-prefer-function-component/recommended"
   ],
-  "overrides": [],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
   "plugins": [
+    "eslint-plugin-import-helpers",
     "react",
-    "eslint-plugin-import-helpers"
+    "import",
+    "jsx-a11y",
+    "react-hooks",
+    "react-prefer-function-component"
   ],
   "rules": {
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
+    "import/no-unresolved": "off",
     "@typescript-eslint/semi": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "function-declaration"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "no-tabs": "off",
     "indent": "off",
     "@typescript-eslint/brace-style": "off",
