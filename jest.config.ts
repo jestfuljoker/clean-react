@@ -9,6 +9,7 @@ const config: Config = {
 	transform: {
 		'^.+\\.(t)sx?$': '@swc/jest',
 	},
+	setupFilesAfterEnv: ['<rootDir>/.jest/jest-setup.ts'],
 	moduleNameMapper: {
 		'~/(.*)': '<rootDir>/src/$1',
 		'\\.scss$': 'identity-obj-proxy',
