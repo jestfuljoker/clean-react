@@ -33,7 +33,9 @@ export function Login(): ReactElement {
 						placeholder="Enter your password"
 					/>
 
-					<Button type="submit">Sign in</Button>
+					<Button data-testid="submit-button" type="submit" disabled>
+						Sign in
+					</Button>
 
 					<span className="link">Sign up</span>
 
