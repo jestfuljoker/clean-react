@@ -5,17 +5,13 @@ type ChildType = {
 	children: ReactNode;
 };
 
-type FieldType<T> = {
-	[P in keyof T]: T[P];
-};
-
 type FormStateProps<T> = {
 	isLoading: boolean;
 	inputError: Record<string, { message?: string }>;
 	formError: {
 		message?: string;
 	};
-	fields: Record<keyof T, FieldType<T>>;
+	fields: Record<keyof T, T[keyof T]>;
 };
 
 interface FormContextProps<T = unknown> extends FormStateProps<T> {
@@ -31,7 +27,7 @@ export function FormContextProvider<T = unknown>({
 		isLoading: false,
 		inputError: {},
 		formError: {},
-		fields: {} as Record<keyof T, FieldType<T>>,
+		fields: {} as Record<keyof T, T[keyof T]>,
 	}));
 
 	const values = useMemo(

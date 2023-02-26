@@ -1,3 +1,3 @@
 export interface Validation {
-	validate: (input: object) => string;
+	validate: <T = unknown>(name: keyof T, value: T[keyof T]) => string;
 }

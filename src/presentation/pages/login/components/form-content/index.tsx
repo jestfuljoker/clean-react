@@ -15,12 +15,13 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 	const { fields } = useFormContext<LoginForm>();
 
 	useEffect(() => {
-		validation.validate({ email: fields.email });
+		validation.validate<LoginForm>('email', fields.email);
 	}, [fields.email]);
 
 	useEffect(() => {
-		validation.validate({ password: fields.password });
+		validation.validate<LoginForm>('password', fields.password);
 	}, [fields.password]);
+
 	return (
 		<>
 			<Input
