@@ -7,6 +7,7 @@ import {
 	Header,
 	Input,
 } from '~/presentation/components';
+import { FormContextProvider } from '~/presentation/contexts';
 
 import './styles.scss';
 
@@ -15,28 +16,30 @@ export function Login(): ReactElement {
 		<div className="login">
 			<Header />
 
-			<form>
-				<h2>Login</h2>
-				<Input
-					id="email"
-					type="email"
-					name="email"
-					placeholder="Enter your email"
-				/>
+			<FormContextProvider>
+				<form>
+					<h2>Login</h2>
+					<Input
+						id="email"
+						type="email"
+						name="email"
+						placeholder="Enter your email"
+					/>
 
-				<Input
-					id="password"
-					type="password"
-					name="password"
-					placeholder="Enter your password"
-				/>
+					<Input
+						id="password"
+						type="password"
+						name="password"
+						placeholder="Enter your password"
+					/>
 
-				<Button type="submit">Sign in</Button>
+					<Button type="submit">Sign in</Button>
 
-				<span className="link">Sign up</span>
+					<span className="link">Sign up</span>
 
-				<FormStatus />
-			</form>
+					<FormStatus />
+				</form>
+			</FormContextProvider>
 
 			<Footer />
 		</div>
