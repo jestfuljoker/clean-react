@@ -7,12 +7,12 @@ import { Spinner } from '../spinner';
 import './styles.scss';
 
 export function FormStatus(): ReactElement {
-	const { isLoading, errorMessage } = useFormContext();
+	const { isLoading, formError } = useFormContext();
 
 	return (
 		<div data-testid="error-container" className="error-container">
 			{isLoading && <Spinner />}
-			{errorMessage && <span className="error">{errorMessage}</span>}
+			{formError?.message && <span className="error">{formError.message}</span>}
 		</div>
 	);
 }

@@ -1,13 +1,9 @@
 import type { ReactElement } from 'react';
 
-import {
-	Button,
-	Footer,
-	FormStatus,
-	Header,
-	Input,
-} from '~/presentation/components';
+import { Footer, Header } from '~/presentation/components';
 import { FormContextProvider } from '~/presentation/contexts';
+
+import { FormContent } from './components';
 
 import './styles.scss';
 
@@ -19,27 +15,7 @@ export function Login(): ReactElement {
 			<FormContextProvider>
 				<form>
 					<h2>Login</h2>
-					<Input
-						id="email"
-						type="email"
-						name="email"
-						placeholder="Enter your email"
-					/>
-
-					<Input
-						id="password"
-						type="password"
-						name="password"
-						placeholder="Enter your password"
-					/>
-
-					<Button data-testid="submit-button" type="submit" disabled>
-						Sign in
-					</Button>
-
-					<span className="link">Sign up</span>
-
-					<FormStatus />
+					<FormContent />
 				</form>
 			</FormContextProvider>
 

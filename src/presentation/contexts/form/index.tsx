@@ -7,7 +7,10 @@ type ChildType = {
 
 type FormStateProps = {
 	isLoading: boolean;
-	errorMessage: string;
+	inputError: Record<string, { message?: string }>;
+	formError: {
+		message?: string;
+	};
 };
 
 const FormContext = createContext<FormStateProps | undefined>(undefined);
@@ -15,7 +18,8 @@ const FormContext = createContext<FormStateProps | undefined>(undefined);
 export function FormContextProvider({ children }: ChildType): ReactElement {
 	const [formState, _setFormState] = useState<FormStateProps>(() => ({
 		isLoading: false,
-		errorMessage: '',
+		inputError: {},
+		formError: {},
 	}));
 
 	const values = useMemo(
