@@ -1,4 +1,9 @@
-import type { InputHTMLAttributes, ReactElement, FocusEvent } from 'react';
+import type {
+	InputHTMLAttributes,
+	ReactElement,
+	FocusEvent,
+	ChangeEvent,
+} from 'react';
 
 import { useFormContext } from '~/presentation/contexts';
 
@@ -9,7 +14,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input(props: InputProps): ReactElement {
-	const { inputError } = useFormContext();
+	const { inputError, setFormState } = useFormContext();
 
 	function enableInput(event: FocusEvent<HTMLInputElement, Element>): void {
 		event.target.readOnly = false;
@@ -23,9 +28,26 @@ export function Input(props: InputProps): ReactElement {
 		return inputError[props.name] ? '🔴' : '';
 	}
 
+	function handleChange(event: ChangeEvent<HTMLInputElement>): void {
+		setFormState((prev) => ({
+			...prev,
+			fields: {
+				...prev.fields,
+				[event.target.name]: event.target.value,
+			},
+		}));
+	}
+
 	return (
 		<div className="container">
-			<input {...props} className="input" readOnly onFocus={enableInput} />
+			<input
+				{...props}
+				className="input"
+				readOnly
+				onFocus={enableInput}
+				data-testid={props.name}
+				onChange={handleChange}
+			/>
 			<span
 				data-testid={`${props.name}-status`}
 				title={getTitle()}

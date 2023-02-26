@@ -1,8 +1,22 @@
 import type { ReactElement } from 'react';
+import { useEffect } from 'react';
 
 import { Input, Button, FormStatus } from '~/presentation/components';
+import { useFormContext } from '~/presentation/contexts';
+import type { Validation } from '~/presentation/protocols';
 
-export function FormContent(): ReactElement {
+import type { LoginForm } from '../../types';
+
+type FormContentProps = {
+	validation: Validation;
+};
+
+export function FormContent({ validation }: FormContentProps): ReactElement {
+	const { fields } = useFormContext<LoginForm>();
+
+	useEffect(() => {
+		validation.validate({ email: fields.email });
+	}, [fields.email]);
 	return (
 		<>
 			<Input
