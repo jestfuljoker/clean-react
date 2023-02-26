@@ -1,16 +1,19 @@
 import type { ReactElement } from 'react';
 
-import { Button, Input, Logo, Spinner } from '~/presentation/components';
+import {
+	Button,
+	Footer,
+	Header,
+	Input,
+	Spinner,
+} from '~/presentation/components';
 
 import './styles.scss';
 
 export function Login(): ReactElement {
 	return (
 		<div className="login">
-			<header>
-				<Logo />
-				<h1>4Dev - Developers poll</h1>
-			</header>
+			<Header />
 
 			<form>
 				<h2>Login</h2>
@@ -38,7 +41,7 @@ export function Login(): ReactElement {
 				</div>
 			</form>
 
-			<footer />
+			<Footer />
 		</div>
 	);
 }
