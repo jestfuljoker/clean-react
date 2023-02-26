@@ -6,7 +6,6 @@ import {
 	FormStatus,
 	Header,
 	Input,
-	Spinner,
 } from '~/presentation/components';
 
 import './styles.scss';
