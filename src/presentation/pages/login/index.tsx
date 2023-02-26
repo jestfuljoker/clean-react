@@ -1,8 +1,6 @@
 import type { ReactElement } from 'react';
 
-import { Button, Input, Spinner } from '~/presentation/components';
-
-import { logo } from './constants';
+import { Button, Input, Logo, Spinner } from '~/presentation/components';
 
 import './styles.scss';
 
@@ -10,7 +8,7 @@ export function Login(): ReactElement {
 	return (
 		<div className="login">
 			<header>
-				<img src={logo} alt="4dev logo" />
+				<Logo />
 				<h1>4Dev - Developers poll</h1>
 			</header>
 
