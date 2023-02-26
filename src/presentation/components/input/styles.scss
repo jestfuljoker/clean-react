@@ -1,0 +1,29 @@
+@import '../../styles/colors.scss';
+
+.container {
+	display: flex;
+	position: relative;
+	align-items: center;
+
+	input {
+		flex-grow: 1;
+	}
+
+	.status {
+		position: absolute;
+		right: 8px;
+		font-size: 0.8571rem;
+		cursor: help;
+	}
+}
+
+.input {
+	border: 1px solid $primaryLight;
+	line-height: 2.8571rem;
+	border-radius: 4px;
+	padding: 0 2.8571rem 0 0.5714rem;
+
+	&:focus {
+		outline-color: $primaryLight;
+	}
+}
