@@ -44,6 +44,7 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "import/no-unresolved": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/semi": "off",
     "react/function-component-definition": [
       "error",
