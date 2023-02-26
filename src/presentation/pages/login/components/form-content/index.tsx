@@ -17,6 +17,10 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 	useEffect(() => {
 		validation.validate({ email: fields.email });
 	}, [fields.email]);
+
+	useEffect(() => {
+		validation.validate({ password: fields.password });
+	}, [fields.password]);
 	return (
 		<>
 			<Input
