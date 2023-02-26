@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import {
 	Button,
 	Footer,
+	FormStatus,
 	Header,
 	Input,
 	Spinner,
@@ -35,10 +36,7 @@ export function Login(): ReactElement {
 
 				<span className="link">Sign up</span>
 
-				<div className="error-container">
-					<Spinner />
-					<span className="error">Error</span>
-				</div>
+				<FormStatus />
 			</form>
 
 			<Footer />
