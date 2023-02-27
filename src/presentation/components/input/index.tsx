@@ -25,7 +25,7 @@ export function Input(props: InputProps): ReactElement {
 	}
 
 	function getStatus(): string {
-		return inputError[props.name] ? '🔴' : '';
+		return inputError[props.name]?.message ? '🔴' : '';
 	}
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>): void {
