@@ -21,11 +21,11 @@ export function Input(props: InputProps): ReactElement {
 	}
 
 	function getTitle(): string | undefined {
-		return inputError[props.name]?.message;
+		return inputError[props.name];
 	}
 
 	function getStatus(): string {
-		return inputError[props.name]?.message ? '🔴' : '';
+		return inputError[props.name] ? '🔴' : '';
 	}
 
 	function handleChange(event: ChangeEvent<HTMLInputElement>): void {

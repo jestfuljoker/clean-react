@@ -1,1 +1,1 @@
-export { ValidationSpy } from './mock-validation';
+export { ValidationStub } from './mock-validation';

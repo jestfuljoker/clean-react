@@ -1,14 +1,9 @@
 import type { Validation } from '../protocols';
 
-export class ValidationSpy implements Validation {
+export class ValidationStub implements Validation {
 	errorMessage: string;
-	fieldName: unknown;
-	fieldValue: unknown;
 
-	validate<T>(name: keyof T, value: T[keyof T]): string {
-		this.fieldName = name;
-		this.fieldValue = value;
-
+	validate<T>(_name: keyof T, _value: T[keyof T]): string {
 		return this.errorMessage;
 	}
 }

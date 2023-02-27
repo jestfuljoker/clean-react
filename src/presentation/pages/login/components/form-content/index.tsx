@@ -19,24 +19,11 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 			...prev,
 			inputError: {
 				...prev.inputError,
-				email: {
-					message: validation.validate<LoginForm>('email', fields.email),
-				},
+				email: validation.validate<LoginForm>('email', fields.email),
+				password: validation.validate<LoginForm>('password', fields.password),
 			},
 		}));
-	}, [fields.email, setFormState, validation]);
-
-	useEffect(() => {
-		setFormState((prev) => ({
-			...prev,
-			inputError: {
-				...prev.inputError,
-				password: {
-					message: validation.validate<LoginForm>('password', fields.password),
-				},
-			},
-		}));
-	}, [fields.password, setFormState, validation]);
+	}, [fields.email, fields.password, setFormState, validation]);
 
 	return (
 		<>

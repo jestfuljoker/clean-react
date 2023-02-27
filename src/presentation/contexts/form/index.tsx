@@ -7,7 +7,7 @@ type ChildType = {
 
 type FormStateProps<T> = {
 	isLoading: boolean;
-	inputError: Record<string, { message?: string }>;
+	inputError: Record<string, string>;
 	formError: {
 		message?: string;
 	};
