@@ -12,6 +12,7 @@ type SutTypes = {
 
 function makeSut(): SutTypes {
 	const validationSpy = new ValidationSpy();
+
 	const sut = render(<Login validation={validationSpy} />);
 
 	return {
@@ -50,9 +51,9 @@ describe('Login Component', () => {
 	});
 
 	it('should call Validation with correct email', () => {
-		const email = faker.internet.email();
 		const { sut, validationSpy } = makeSut();
 		const emailInput = sut.getByTestId('email');
+		const email = faker.internet.email();
 
 		fireEvent.input(emailInput, { target: { value: email } });
 
@@ -70,5 +71,21 @@ describe('Login Component', () => {
 
 		expect(validationSpy.fieldName).toEqual('password');
 		expect(validationSpy.fieldValue).toEqual(password);
+	});
+
+	it('should show email error if Validation fails', () => {
+		const { sut, validationSpy } = makeSut();
+		const emailInput = sut.getByTestId('email');
+
+		validationSpy.errorMessage = faker.random.words();
+
+		fireEvent.input(emailInput, {
+			target: { value: faker.internet.email() },
+		});
+
+		const emailStatus = sut.getByTestId('email-status');
+
+		expect(emailStatus.title).toBe(validationSpy.errorMessage);
+		expect(emailStatus.textContent).toBe('🔴');
 	});
 });
