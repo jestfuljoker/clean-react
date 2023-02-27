@@ -12,15 +12,31 @@ type FormContentProps = {
 };
 
 export function FormContent({ validation }: FormContentProps): ReactElement {
-	const { fields } = useFormContext<LoginForm>();
+	const { fields, setFormState } = useFormContext<LoginForm>();
 
 	useEffect(() => {
-		validation.validate<LoginForm>('email', fields.email);
-	}, [fields.email]);
+		setFormState((prev) => ({
+			...prev,
+			inputError: {
+				...prev.inputError,
+				email: {
+					message: validation.validate<LoginForm>('email', fields.email),
+				},
+			},
+		}));
+	}, [fields.email, setFormState, validation]);
 
 	useEffect(() => {
-		validation.validate<LoginForm>('password', fields.password);
-	}, [fields.password]);
+		setFormState((prev) => ({
+			...prev,
+			inputError: {
+				...prev.inputError,
+				password: {
+					message: validation.validate<LoginForm>('password', fields.password),
+				},
+			},
+		}));
+	}, [fields.password, setFormState, validation]);
 
 	return (
 		<>
