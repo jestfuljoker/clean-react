@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 
+import type { Authentication } from '~/domain/usecases';
 import { Footer, Header } from '~/presentation/components';
 import { FormContextProvider } from '~/presentation/contexts';
 import type { Validation } from '~/presentation/protocols';
@@ -10,11 +11,15 @@ import type { LoginForm } from './types';
 
 type LoginProps = {
 	validation: Validation;
+	authentication: Authentication;
 };
 
-export function Login({ validation }: LoginProps): ReactElement {
-	function handleSubmit(data: LoginForm): void {
-		console.log({ data });
+export function Login({
+	validation,
+	authentication,
+}: LoginProps): ReactElement {
+	async function handleSubmit(formData: LoginForm): Promise<void> {
+		await authentication.auth(formData);
 	}
 
 	return (
