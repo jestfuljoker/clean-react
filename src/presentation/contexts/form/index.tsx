@@ -42,13 +42,18 @@ export function FormContextProvider<T = unknown>({
 		[formState],
 	);
 
+	function inputHasError(): boolean {
+		return Object.values(formState.inputError).some((value) => !!value);
+	}
+
 	return (
 		<FormContext.Provider value={values as FormContextProps<unknown>}>
 			<form
+				data-testid="form"
 				onSubmit={(event) => {
 					event.preventDefault();
 					try {
-						if (formState.isLoading) {
+						if (formState.isLoading || inputHasError()) {
 							return;
 						}
 
