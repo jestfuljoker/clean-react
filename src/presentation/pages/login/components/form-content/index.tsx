@@ -12,7 +12,7 @@ type FormContentProps = {
 };
 
 export function FormContent({ validation }: FormContentProps): ReactElement {
-	const { fields, setFormState } = useFormContext<LoginForm>();
+	const { fields, setFormState, inputError } = useFormContext<LoginForm>();
 
 	useEffect(() => {
 		setFormState((prev) => ({
@@ -24,6 +24,11 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 			},
 		}));
 	}, [fields.email, fields.password, setFormState, validation]);
+
+	const shouldDisableButton =
+		(!inputError.email || !inputError.password) &&
+		!fields.email &&
+		!fields.password;
 
 	return (
 		<>
@@ -41,7 +46,11 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 				placeholder="Enter your password"
 			/>
 
-			<Button data-testid="submit-button" type="submit" disabled>
+			<Button
+				data-testid="submit-button"
+				type="submit"
+				disabled={shouldDisableButton}
+			>
 				Sign in
 			</Button>
 

@@ -1,13 +1,14 @@
 import type { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
 import { useMemo, useState, createContext, useContext } from 'react';
 
-type ChildType = {
+type FormContextProviderProps<T> = {
 	children: ReactNode;
+	defaultValues?: T;
 };
 
 type FormStateProps<T> = {
 	isLoading: boolean;
-	inputError: Record<string, string>;
+	inputError: Record<keyof T, T[keyof T]>;
 	formError: {
 		message?: string;
 	};
@@ -22,12 +23,13 @@ const FormContext = createContext<FormContextProps | undefined>(undefined);
 
 export function FormContextProvider<T = unknown>({
 	children,
-}: ChildType): ReactElement {
+	defaultValues,
+}: FormContextProviderProps<T>): ReactElement {
 	const [formState, setFormState] = useState<FormStateProps<T>>(() => ({
 		isLoading: false,
-		inputError: {},
+		inputError: {} as Record<keyof T, T[keyof T]>,
 		formError: {},
-		fields: {} as Record<keyof T, T[keyof T]>,
+		fields: defaultValues as Record<keyof T, T[keyof T]>,
 	}));
 
 	const values = useMemo(

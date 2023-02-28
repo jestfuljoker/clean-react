@@ -17,7 +17,12 @@ export function Login({ validation }: LoginProps): ReactElement {
 		<div className="login">
 			<Header />
 
-			<FormContextProvider<LoginForm>>
+			<FormContextProvider<LoginForm>
+				defaultValues={{
+					email: '',
+					password: '',
+				}}
+			>
 				<form>
 					<h2>Login</h2>
 					<FormContent validation={validation} />
