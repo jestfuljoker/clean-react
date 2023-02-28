@@ -83,10 +83,8 @@ describe('Login Component', () => {
 	});
 
 	it('should show valid email state if Validation succeeds', () => {
-		const { sut, validationStub } = makeSut();
+		const { sut } = makeSut();
 		const emailInput = sut.getByTestId('email');
-
-		validationStub.errorMessage = '';
 
 		fireEvent.input(emailInput, {
 			target: { value: faker.internet.email() },
@@ -99,10 +97,8 @@ describe('Login Component', () => {
 	});
 
 	it('should show valid password state if Validation succeeds', () => {
-		const { sut, validationStub } = makeSut();
+		const { sut } = makeSut();
 		const passwordInput = sut.getByTestId('password');
-
-		validationStub.errorMessage = '';
 
 		fireEvent.input(passwordInput, {
 			target: { value: faker.internet.password() },
