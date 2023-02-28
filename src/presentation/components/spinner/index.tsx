@@ -3,7 +3,7 @@ import './styles.scss';
 
 export function Spinner(): ReactElement {
 	return (
-		<div className="spinner">
+		<div className="spinner" data-testid="spinner">
 			<div />
 			<div />
 			<div />

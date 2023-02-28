@@ -4,6 +4,7 @@ import { useMemo, useState, createContext, useContext } from 'react';
 type FormContextProviderProps<T> = {
 	children: ReactNode;
 	defaultValues?: T;
+	onSubmit: (data: Record<keyof T, T[keyof T]>) => Promise<void> | void;
 };
 
 type FormStateProps<T> = {
@@ -24,6 +25,7 @@ const FormContext = createContext<FormContextProps | undefined>(undefined);
 export function FormContextProvider<T = unknown>({
 	children,
 	defaultValues,
+	onSubmit,
 }: FormContextProviderProps<T>): ReactElement {
 	const [formState, setFormState] = useState<FormStateProps<T>>(() => ({
 		isLoading: false,
@@ -42,7 +44,22 @@ export function FormContextProvider<T = unknown>({
 
 	return (
 		<FormContext.Provider value={values as FormContextProps<unknown>}>
-			{children}
+			<form
+				onSubmit={(event) => {
+					event.preventDefault();
+					try {
+						setFormState((prev) => ({
+							...prev,
+							isLoading: true,
+						}));
+						void onSubmit(formState.fields);
+					} catch (error) {
+						console.error(error);
+					}
+				}}
+			>
+				{children}
+			</form>
 		</FormContext.Provider>
 	);
 }

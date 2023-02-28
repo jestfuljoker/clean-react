@@ -13,20 +13,23 @@ type LoginProps = {
 };
 
 export function Login({ validation }: LoginProps): ReactElement {
+	function handleSubmit(data: LoginForm): void {
+		console.log({ data });
+	}
+
 	return (
 		<div className="login">
 			<Header />
 
 			<FormContextProvider<LoginForm>
+				onSubmit={handleSubmit}
 				defaultValues={{
 					email: '',
 					password: '',
 				}}
 			>
-				<form>
-					<h2>Login</h2>
-					<FormContent validation={validation} />
-				</form>
+				<h2>Login</h2>
+				<FormContent validation={validation} />
 			</FormContextProvider>
 
 			<Footer />
