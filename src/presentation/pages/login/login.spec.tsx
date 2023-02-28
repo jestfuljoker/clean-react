@@ -2,26 +2,45 @@ import { faker } from '@faker-js/faker';
 import type { RenderResult } from '@testing-library/react';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 
+import type { AccountModel } from '~/domain/models';
+import { mockAccountModel } from '~/domain/test';
+import type { Authentication, AuthenticationParams } from '~/domain/usecases';
 import { Login } from '~/presentation/pages';
 import { ValidationStub } from '~/presentation/test';
 
 type SutTypes = {
 	sut: RenderResult;
+	authenticationSpy: AuthenticationSpy;
 };
 
 type SutParams = {
 	validationError: string;
 };
 
+class AuthenticationSpy implements Authentication {
+	account = mockAccountModel();
+	params: AuthenticationParams;
+
+	async auth(params: AuthenticationParams): Promise<AccountModel> {
+		this.params = params;
+
+		return this.account;
+	}
+}
+
 function makeSut(params?: SutParams): SutTypes {
 	const validationStub = new ValidationStub();
+	const authenticationSpy = new AuthenticationSpy();
 
 	validationStub.errorMessage = params?.validationError ?? '';
 
-	const sut = render(<Login validation={validationStub} />);
+	const sut = render(
+		<Login validation={validationStub} authentication={authenticationSpy} />,
+	);
 
 	return {
 		sut,
+		authenticationSpy,
 	};
 }
 
@@ -154,5 +173,30 @@ describe('Login Component', () => {
 		const spinner = sut.getByTestId('spinner');
 
 		expect(spinner).toBeTruthy();
+	});
+
+	it('should call authentication with correct values', () => {
+		const { sut, authenticationSpy } = makeSut();
+		const emailInput = sut.getByTestId('email');
+		const passwordInput = sut.getByTestId('password');
+
+		const params = {
+			email: faker.internet.email(),
+			password: faker.internet.password(),
+		};
+
+		fireEvent.input(emailInput, {
+			target: { value: params.email },
+		});
+
+		fireEvent.input(passwordInput, {
+			target: { value: params.password },
+		});
+
+		const submitButton = sut.getByTestId('submit-button');
+
+		fireEvent.click(submitButton);
+
+		expect(authenticationSpy.params).toEqual(params);
 	});
 });
