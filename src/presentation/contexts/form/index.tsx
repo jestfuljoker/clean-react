@@ -48,6 +48,10 @@ export function FormContextProvider<T = unknown>({
 				onSubmit={(event) => {
 					event.preventDefault();
 					try {
+						if (formState.isLoading) {
+							return;
+						}
+
 						setFormState((prev) => ({
 							...prev,
 							isLoading: true,
