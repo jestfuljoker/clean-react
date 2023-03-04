@@ -16,13 +16,13 @@
   - [ ] Test the methods (in progress 🚧);
   - [ ] Implement in presentation layer.
 
-- [X] Login;
-    - [X] Domain Layer
-    - [X] Data Layer
-    - [X] Tests
-    - [x] Validation
-    - [x] Presentation Layer
-    - [x] Infra Layer
+- [X] Login:
+    - [X] Domain Layer;
+    - [X] Data Layer;
+    - [X] Tests;
+    - [x] Validation;
+    - [x] Presentation Layer;
+    - [x] Infra Layer;
 ---
 ### 🛠️ Technologies
 - [Typescript](https://www.typescriptlang.org/docs/);
