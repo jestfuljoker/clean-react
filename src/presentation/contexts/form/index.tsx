@@ -4,14 +4,14 @@ import { useMemo, useState, createContext, useContext } from 'react';
 type FormContextProviderProps<T> = {
 	children: ReactNode;
 	defaultValues?: T;
-	onSubmit: (data: Record<keyof T, T[keyof T]>) => Promise<void> | void;
+	onSubmit: (data: Record<keyof T, T[keyof T]>) => Promise<void>;
 };
 
 type FormStateProps<T> = {
 	isLoading: boolean;
 	inputError: Record<keyof T, T[keyof T]>;
 	formError: {
-		message?: string;
+		message: string;
 	};
 	fields: Record<keyof T, T[keyof T]>;
 };
@@ -30,7 +30,9 @@ export function FormContextProvider<T = unknown>({
 	const [formState, setFormState] = useState<FormStateProps<T>>(() => ({
 		isLoading: false,
 		inputError: {} as Record<keyof T, T[keyof T]>,
-		formError: {},
+		formError: {
+			message: '',
+		},
 		fields: defaultValues as Record<keyof T, T[keyof T]>,
 	}));
 
@@ -50,8 +52,9 @@ export function FormContextProvider<T = unknown>({
 		<FormContext.Provider value={values as FormContextProps<unknown>}>
 			<form
 				data-testid="form"
-				onSubmit={(event) => {
+				onSubmit={async (event) => {
 					event.preventDefault();
+
 					try {
 						if (formState.isLoading || inputHasError()) {
 							return;
@@ -61,9 +64,16 @@ export function FormContextProvider<T = unknown>({
 							...prev,
 							isLoading: true,
 						}));
-						void onSubmit(formState.fields);
+
+						await onSubmit(formState.fields);
 					} catch (error) {
-						console.error(error);
+						setFormState((prev) => ({
+							...prev,
+							isLoading: false,
+							formError: {
+								message: (error as Error).message,
+							},
+						}));
 					}
 				}}
 			>

@@ -19,7 +19,9 @@ export function Login({
 	authentication,
 }: LoginProps): ReactElement {
 	async function handleSubmit(formData: LoginForm): Promise<void> {
-		await authentication.auth(formData);
+		const account = await authentication.auth(formData);
+
+		localStorage.setItem('accessToken', account.accessToken);
 	}
 
 	return (

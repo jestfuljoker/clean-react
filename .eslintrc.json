@@ -46,6 +46,7 @@
     "import/no-unresolved": "off",
     "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/semi": "off",
+    "@typescript-eslint/no-misused-promises": "off",
     "react/function-component-definition": [
       "error",
       {

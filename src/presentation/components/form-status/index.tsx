@@ -12,7 +12,11 @@ export function FormStatus(): ReactElement {
 	return (
 		<div data-testid="error-container" className="error-container">
 			{isLoading && <Spinner />}
-			{formError?.message && <span className="error">{formError.message}</span>}
+			{formError?.message && (
+				<span data-testid="main-error" className="error">
+					{formError.message}
+				</span>
+			)}
 		</div>
 	);
 }
