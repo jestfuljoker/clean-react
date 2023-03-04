@@ -11,6 +11,11 @@
 
 ### 🚀 Developed features
 
+- Validation Layer:
+  - [x] Use composite pattern to create validation methods;
+  - [ ] Test the methods (in progress 🚧);
+  - [ ] Implement in presentation layer.
+
 - [X] Login;
     - [X] Domain Layer
     - [X] Data Layer
