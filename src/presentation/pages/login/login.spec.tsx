@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 import type { RenderResult } from '@testing-library/react';
 import { waitFor, cleanup, fireEvent, render } from '@testing-library/react';
 
+import { InvalidCredentialsError } from '~/domain/errors';
 import { Login } from '~/presentation/pages';
 import { AuthenticationSpy, ValidationStub } from '~/presentation/test';
 
@@ -203,24 +204,24 @@ describe('Login Component', () => {
 		expect(authenticationSpy.callsCount).toBe(0);
 	});
 
-	// 	it('should show error if Authentication fails', async () => {
-	// 		const { sut, authenticationSpy } = makeSut();
+	it('should show error if Authentication fails', async () => {
+		const { sut, authenticationSpy } = makeSut();
 
-	// 		const error = new InvalidCredentialsError();
+		const error = new InvalidCredentialsError();
 
-	// 		jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error);
+		jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error);
 
-	// 		simulateValidSubmit(sut);
+		simulateValidSubmit(sut);
 
-	// 		const errorContainer = sut.getByTestId('error-container');
+		const errorContainer = sut.getByTestId('error-container');
 
-	// 		await waitFor(() => errorContainer);
+		await waitFor(() => errorContainer);
 
-	// 		// const mainError = sut.getByTestId('main-error');
-	// 		// expect(mainError.textContent).toBe(error.message);
+		const mainError = sut.getByTestId('main-error');
+		expect(mainError.textContent).toBe(error.message);
 
-	// 		// expect(errorContainer.childElementCount).toBe(1);
-	// 	});
+		expect(errorContainer.childElementCount).toBe(1);
+	});
 
 	it('should add accessToken to localStorage on success ', async () => {
 		const { sut, authenticationSpy } = makeSut();
