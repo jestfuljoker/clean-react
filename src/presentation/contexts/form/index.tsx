@@ -4,7 +4,6 @@ import { useMemo, useState, createContext, useContext } from 'react';
 type FormContextProviderProps<T> = {
 	children: ReactNode;
 	defaultValues?: T;
-	onSubmit: (data: Record<keyof T, T[keyof T]>) => Promise<void>;
 };
 
 type FormStateProps<T> = {
@@ -25,7 +24,6 @@ const FormContext = createContext<FormContextProps | undefined>(undefined);
 export function FormContextProvider<T = unknown>({
 	children,
 	defaultValues,
-	onSubmit,
 }: FormContextProviderProps<T>): ReactElement {
 	const [formState, setFormState] = useState<FormStateProps<T>>(() => ({
 		isLoading: false,
@@ -44,41 +42,9 @@ export function FormContextProvider<T = unknown>({
 		[formState],
 	);
 
-	function inputHasError(): boolean {
-		return Object.values(formState.inputError).some((value) => !!value);
-	}
-
 	return (
 		<FormContext.Provider value={values as FormContextProps<unknown>}>
-			<form
-				data-testid="form"
-				onSubmit={async (event) => {
-					event.preventDefault();
-
-					try {
-						if (formState.isLoading || inputHasError()) {
-							return;
-						}
-
-						setFormState((prev) => ({
-							...prev,
-							isLoading: true,
-						}));
-
-						await onSubmit(formState.fields);
-					} catch (error) {
-						setFormState((prev) => ({
-							...prev,
-							isLoading: false,
-							formError: {
-								message: (error as Error).message,
-							},
-						}));
-					}
-				}}
-			>
-				{children}
-			</form>
+			{children}
 		</FormContext.Provider>
 	);
 }

@@ -1,45 +1,87 @@
-import type { ReactElement } from 'react';
+import type { FormEvent, ReactElement } from 'react';
 
 import type { Authentication } from '~/domain/usecases';
 import { Footer, Header } from '~/presentation/components';
-import { FormContextProvider } from '~/presentation/contexts';
+import { FormContextProvider, useFormContext } from '~/presentation/contexts';
 import type { Validation } from '~/presentation/protocols';
 
 import { FormContent } from './components';
 import './styles.scss';
-import type { LoginForm } from './types';
 
 type LoginProps = {
 	validation: Validation;
 	authentication: Authentication;
 };
 
-export function Login({
+type LoginForm = {
+	email: string;
+	password: string;
+};
+
+function LoginComponent({
 	validation,
 	authentication,
 }: LoginProps): ReactElement {
-	async function handleSubmit(formData: LoginForm): Promise<void> {
-		const account = await authentication.auth(formData);
+	const { isLoading, inputError, setFormState, fields } =
+		useFormContext<LoginForm>();
 
-		localStorage.setItem('accessToken', account.accessToken);
+	function inputHasError(): boolean {
+		return Object.values(inputError).some((value) => !!value);
+	}
+
+	async function handleSubmit(
+		event: FormEvent<HTMLFormElement>,
+	): Promise<void> {
+		event.preventDefault();
+
+		try {
+			if (isLoading || inputHasError()) {
+				return;
+			}
+
+			setFormState((prev) => ({
+				...prev,
+				isLoading: true,
+			}));
+
+			const account = await authentication.auth(fields);
+
+			localStorage.setItem('accessToken', account.accessToken);
+		} catch (error) {
+			setFormState((prev) => ({
+				...prev,
+				isLoading: false,
+				formError: {
+					message: (error as Error).message,
+				},
+			}));
+		}
 	}
 
 	return (
 		<div className="login">
 			<Header />
 
-			<FormContextProvider<LoginForm>
-				onSubmit={handleSubmit}
-				defaultValues={{
-					email: '',
-					password: '',
-				}}
-			>
-				<h2>Login</h2>
+			<h2>Login</h2>
+
+			<form data-testid="form" onSubmit={handleSubmit}>
 				<FormContent validation={validation} />
-			</FormContextProvider>
+			</form>
 
 			<Footer />
 		</div>
+	);
+}
+
+export function Login(props: LoginProps): ReactElement {
+	return (
+		<FormContextProvider<LoginForm>
+			defaultValues={{
+				email: '',
+				password: '',
+			}}
+		>
+			<LoginComponent {...props} />
+		</FormContextProvider>
 	);
 }
