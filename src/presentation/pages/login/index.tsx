@@ -1,4 +1,5 @@
 import type { FormEvent, ReactElement } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import type { Authentication } from '~/domain/usecases';
 import { Footer, Header } from '~/presentation/components';
@@ -6,6 +7,7 @@ import { FormContextProvider, useFormContext } from '~/presentation/contexts';
 import type { Validation } from '~/presentation/protocols';
 
 import { FormContent } from './components';
+
 import './styles.scss';
 
 type LoginProps = {
@@ -22,6 +24,8 @@ function LoginComponent({
 	validation,
 	authentication,
 }: LoginProps): ReactElement {
+	const history = useHistory();
+
 	const { isLoading, inputError, setFormState, fields } =
 		useFormContext<LoginForm>();
 
@@ -47,6 +51,8 @@ function LoginComponent({
 			const account = await authentication.auth(fields);
 
 			localStorage.setItem('accessToken', account.accessToken);
+
+			history.replace('/');
 		} catch (error) {
 			setFormState((prev) => ({
 				...prev,
