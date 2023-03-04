@@ -1,6 +1,7 @@
+import 'jest-localstorage-mock';
 import { faker } from '@faker-js/faker';
 import type { RenderResult } from '@testing-library/react';
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { waitFor, cleanup, fireEvent, render } from '@testing-library/react';
 
 import { Login } from '~/presentation/pages';
 import { AuthenticationSpy, ValidationStub } from '~/presentation/test';
@@ -86,6 +87,9 @@ function simulateStatusForField(
 
 describe('Login Component', () => {
 	afterEach(cleanup);
+	beforeEach(() => {
+		localStorage.clear();
+	});
 
 	it('should start with initial state', () => {
 		const { sut } = makeSut();
@@ -197,5 +201,37 @@ describe('Login Component', () => {
 		fireEvent.submit(sut.getByTestId('form'));
 
 		expect(authenticationSpy.callsCount).toBe(0);
+	});
+
+	// 	it('should show error if Authentication fails', async () => {
+	// 		const { sut, authenticationSpy } = makeSut();
+
+	// 		const error = new InvalidCredentialsError();
+
+	// 		jest.spyOn(authenticationSpy, 'auth').mockRejectedValueOnce(error);
+
+	// 		simulateValidSubmit(sut);
+
+	// 		const errorContainer = sut.getByTestId('error-container');
+
+	// 		await waitFor(() => errorContainer);
+
+	// 		// const mainError = sut.getByTestId('main-error');
+	// 		// expect(mainError.textContent).toBe(error.message);
+
+	// 		// expect(errorContainer.childElementCount).toBe(1);
+	// 	});
+
+	it('should add accessToken to localStorage on success ', async () => {
+		const { sut, authenticationSpy } = makeSut();
+
+		simulateValidSubmit(sut);
+
+		await waitFor(() => sut.getByTestId('form'));
+
+		expect(localStorage.setItem).toHaveBeenCalledWith(
+			'accessToken',
+			authenticationSpy.account.accessToken,
+		);
 	});
 });
