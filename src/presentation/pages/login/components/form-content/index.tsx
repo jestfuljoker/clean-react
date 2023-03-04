@@ -1,11 +1,12 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Input, Button, FormStatus } from '~/presentation/components';
 import { useFormContext } from '~/presentation/contexts';
 import type { Validation } from '~/presentation/protocols';
 
-import type { LoginForm } from '../../types';
+import type { LoginForm } from '../..';
 
 type FormContentProps = {
 	validation: Validation;
@@ -54,7 +55,9 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 				Sign in
 			</Button>
 
-			<span className="link">Sign up</span>
+			<Link data-testid="signUp" className="link" to="/signUp">
+				Sign up
+			</Link>
 
 			<FormStatus />
 		</>
