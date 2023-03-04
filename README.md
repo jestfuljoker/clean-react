@@ -4,8 +4,7 @@
 
 <p align="center">
  <a href="#features-desenvolvidas">Developed features</a> •
- <a href="#tecnologias">Technologies</a>
- <!-- <a href="#tecnologias">Notes</a> -->
+ <a href="#technologies">Technologies</a>
 </p>
 
 <!-- <img src="/clynic-test.gif" alt="exemplo sistema clynic"> -->
@@ -13,12 +12,12 @@
 ### 🚀 Developed features
 
 - [X] Login;
-    - [X] Domain
+    - [X] Domain Layer
     - [X] Data Layer
     - [X] Tests
-    - [ ] Validation
-    - [ ] Presentation
-    - [ ] Infra (In progress)
+    - [x] Validation
+    - [x] Presentation Layer
+    - [x] Infra Layer
 ---
 ### 🛠️ Technologies
 - [Typescript](https://www.typescriptlang.org/docs/);
@@ -27,9 +26,6 @@
 - [Faker](https://fakerjs.dev/);
 - [Axios](https://axios-http.com/docs/intro).
 
-
-<!-- --- -->
-<!-- ### 📚 Notes -->
 
 <p align="center" style="margin-top: 20px; padding-top: 20px;">
   With 💙 by <strong>Chriszao</strong>
