@@ -2,6 +2,8 @@ import 'jest-localstorage-mock';
 import { faker } from '@faker-js/faker';
 import type { RenderResult } from '@testing-library/react';
 import { waitFor, cleanup, fireEvent, render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 
 import { InvalidCredentialsError } from '~/domain/errors';
 import { Login } from '~/presentation/pages';
@@ -16,6 +18,8 @@ type SutParams = {
 	validationError: string;
 };
 
+const history = createMemoryHistory();
+
 function makeSut(params?: SutParams): SutTypes {
 	const validationStub = new ValidationStub();
 	const authenticationSpy = new AuthenticationSpy();
@@ -23,7 +27,9 @@ function makeSut(params?: SutParams): SutTypes {
 	validationStub.errorMessage = params?.validationError ?? '';
 
 	const sut = render(
-		<Login validation={validationStub} authentication={authenticationSpy} />,
+		<Router history={history}>
+			<Login validation={validationStub} authentication={authenticationSpy} />,
+		</Router>,
 	);
 
 	return {
@@ -234,5 +240,16 @@ describe('Login Component', () => {
 			'accessToken',
 			authenticationSpy.account.accessToken,
 		);
+	});
+
+	it('should redirect to signUp page', async () => {
+		const { sut } = makeSut();
+
+		const signUp = sut.getByTestId('signUp');
+
+		fireEvent.click(signUp);
+
+		expect(history.length).toBe(2);
+		expect(history.location.pathname).toBe('/signUp');
 	});
 });
