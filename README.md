@@ -14,7 +14,8 @@
 - Validation Layer:
   - [x] Use composite pattern to create validation methods;
   - [ ] Test the methods (in progress 🚧);
-  - [ ] Implement in presentation layer.
+  - [ ] Implement in presentation layer;
+  - [ ] Use Builder pattern to build composite validator class;
 
 - [X] Login:
     - [X] Domain Layer;
