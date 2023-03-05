@@ -14,7 +14,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input(props: InputProps): ReactElement {
-	const { inputError, setFormState } = useFormContext();
+	const { inputError, setFormState } = useFormContext<Record<string, string>>();
 
 	function enableInput(event: FocusEvent<HTMLInputElement, Element>): void {
 		event.target.readOnly = false;

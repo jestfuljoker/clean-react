@@ -1,13 +1,15 @@
-import type { ReactElement } from 'react';
+import type { ComponentType, ReactElement } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { Login } from '../pages';
+type Props = {
+	makeLogin: ComponentType;
+};
 
-export function Router(): ReactElement {
+export function Router({ makeLogin }: Props): ReactElement {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path="/login" component={Login} />
+				<Route path="/login" exact component={makeLogin} />
 			</Switch>
 		</BrowserRouter>
 	);

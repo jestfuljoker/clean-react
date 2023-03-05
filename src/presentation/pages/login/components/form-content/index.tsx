@@ -27,9 +27,9 @@ export function FormContent({ validation }: FormContentProps): ReactElement {
 	}, [fields.email, fields.password, setFormState, validation]);
 
 	const shouldDisableButton =
-		(!inputError.email || !inputError.password) &&
-		!fields.email &&
-		!fields.password;
+		(!!inputError.email || !!inputError.password) &&
+		fields.email === '' &&
+		fields.password === '';
 
 	return (
 		<>

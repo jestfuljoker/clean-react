@@ -6,8 +6,12 @@ import type {
 	HttpResponse,
 } from '~/data/protocols/http';
 
-export class AxiosHttpClient implements HttpPostClient<unknown, unknown> {
-	async post(params: HttpPostParams<unknown>): Promise<HttpResponse<unknown>> {
+export class AxiosHttpClient<TParams, TResponse>
+	implements HttpPostClient<TParams, TResponse>
+{
+	async post(
+		params: HttpPostParams<TParams>,
+	): Promise<HttpResponse<TResponse>> {
 		const httpResponse = await axios.post(params.url, params.body);
 
 		return {

@@ -122,12 +122,14 @@ describe('Login Component', () => {
 	});
 
 	it('should start with initial state', () => {
-		const { sut } = makeSut();
+		const validationError = faker.random.word();
 
-		testStatusForField(sut, 'email');
-		testStatusForField(sut, 'password');
+		const { sut } = makeSut({ validationError });
+
 		testErrorContainerChildCount(sut, 0);
 		testButtonIsDisabled(sut, 'submit-button', true);
+		testStatusForField(sut, 'email', validationError);
+		testStatusForField(sut, 'password', validationError);
 	});
 
 	it('should show email error if Validation fails', () => {

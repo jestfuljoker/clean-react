@@ -8,7 +8,7 @@ export class ValidationComposite implements Validation {
 		return new ValidationComposite(validators);
 	}
 
-	validate<T = unknown>(name: keyof T, value: T[keyof T]): string | null {
+	validate<T = unknown>(name: keyof T, value: T[keyof T]): string {
 		if (typeof value !== 'string') {
 			throw new TypeError(
 				`Type of ${name as string} should be a string but was ${typeof value}`,
@@ -27,6 +27,6 @@ export class ValidationComposite implements Validation {
 			}
 		}
 
-		return null;
+		return '';
 	}
 }

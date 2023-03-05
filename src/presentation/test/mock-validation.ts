@@ -3,7 +3,7 @@ import type { Validation } from '../protocols';
 export class ValidationStub implements Validation {
 	errorMessage: string;
 
-	validate<T>(_name: keyof T, _value: T[keyof T]): string | null {
+	validate<T>(_name: keyof T, _value: T[keyof T]): string {
 		return this.errorMessage;
 	}
 }

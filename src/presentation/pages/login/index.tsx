@@ -68,9 +68,8 @@ function LoginComponent({
 		<div className="login">
 			<Header />
 
-			<h2>Login</h2>
-
 			<form data-testid="form" onSubmit={handleSubmit}>
+				<h2>Login</h2>
 				<FormContent validation={validation} />
 			</form>
 
