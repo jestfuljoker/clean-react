@@ -9,7 +9,7 @@ import { ValidationComposite } from '~/validation/validators';
 import { ValidationBuilder } from '~/validation/validators/builder/validation-builder';
 
 export function makeLogin(): ReactElement {
-	const url = 'https://fordevs.herokuapp.com/api/login';
+	const url = 'http://fordevs.herokuapp.com/api/login';
 
 	const axiosHttpClient = new AxiosHttpClient<
 		AuthenticationParams,

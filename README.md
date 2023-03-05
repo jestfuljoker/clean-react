@@ -1,5 +1,7 @@
 # React Clean Arch ⚛️
 
+##### ⚠️ Work stopped to develop backend API first
+
 > This project is focused on how to implement Clean Architecture, Solid, DDD and TDD principles in frontend applications.
 
 <p align="center">
@@ -7,15 +9,13 @@
  <a href="#technologies">Technologies</a>
 </p>
 
-<!-- <img src="/clynic-test.gif" alt="exemplo sistema clynic"> -->
-
 ### 🚀 Developed features
 
 - Validation Layer:
   - [x] Use composite pattern to create validation methods;
-  - [ ] Test the methods (in progress 🚧);
-  - [ ] Implement in presentation layer;
-  - [ ] Use Builder pattern to build composite validator class;
+  - [x] Test the methods;
+  - [x] Implement in presentation layer;
+  - [x] Use Builder pattern to build composite validator class;
 
 - [X] Login:
     - [X] Domain Layer;
