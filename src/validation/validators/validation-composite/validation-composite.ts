@@ -2,7 +2,11 @@ import type { Validation } from '~/presentation/protocols';
 import type { FieldValidation } from '~/validation/protocols';
 
 export class ValidationComposite implements Validation {
-	constructor(private readonly validators: FieldValidation[]) {}
+	private constructor(private readonly validators: FieldValidation[]) {}
+
+	static build(validators: FieldValidation[]): ValidationComposite {
+		return new ValidationComposite(validators);
+	}
 
 	validate<T = unknown>(name: keyof T, value: T[keyof T]): string | null {
 		if (typeof value !== 'string') {
